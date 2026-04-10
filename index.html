@@ -22,22 +22,19 @@
 
     * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
     
-    body { 
-      background-color: var(--bg-light); 
-      color: var(--text-main); 
-      min-height: 100vh; 
-      display: flex; 
-      flex-direction: column; 
+    body { background-color: var(--bg-light); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* =========================================
+       TAMPILAN 1: MENU PORTAL UTAMA
+       ========================================= */
+    #home-view {
+      display: flex; flex-direction: column; height: 100%; overflow-y: auto;
+      animation: fadeIn 0.4s ease;
     }
 
-    /* --- HERO HEADER --- */
     header {
       background: linear-gradient(135deg, var(--primary-solid) 0%, var(--primary) 100%);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-      position: relative;
-      box-shadow: var(--shadow-md);
+      color: white; text-align: center; padding: 60px 20px; position: relative; box-shadow: var(--shadow-md);
     }
     header::after {
       content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 5px;
@@ -46,129 +43,161 @@
     header h1 { font-size: 36px; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
     header p { font-size: 18px; font-weight: 400; color: #d1fae5; max-width: 600px; margin: 0 auto; line-height: 1.5; }
 
-    /* --- MAIN CONTENT --- */
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 60px 20px;
-    }
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; width: 100%; max-width: 900px; margin: 60px auto; padding: 0 20px;}
 
-    .portal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      width: 100%;
-      max-width: 900px;
-    }
-
-    /* --- CARDS --- */
     .card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      box-shadow: var(--shadow-md);
-      transition: all 0.4s ease;
-      border: 1px solid #e5e7eb;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      background: var(--white); border-radius: 20px; padding: 40px 30px; text-align: center;
+      box-shadow: var(--shadow-md); transition: all 0.4s ease; border: 1px solid #e5e7eb;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
     }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--primary-light);
-    }
-    .card::before {
-      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
-      background: var(--primary-light); opacity: 0; transition: 0.3s;
-    }
+    .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-xl); border-color: var(--primary-light); }
+    .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: var(--primary-light); opacity: 0; transition: 0.3s; }
     .card:hover::before { opacity: 1; }
 
     .icon-wrapper {
-      width: 80px; height: 80px;
-      background: #ecfdf5;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 36px;
-      color: var(--primary-dark);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      width: 80px; height: 80px; background: #ecfdf5; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+      font-size: 36px; color: var(--primary-dark); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .card h2 { font-size: 24px; font-weight: 800; color: var(--primary-solid); margin-bottom: 15px; }
     .card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 30px; flex: 1; }
 
     .btn {
-      display: inline-block;
-      width: 100%;
-      padding: 16px 24px;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: 0.3s;
+      display: inline-block; width: 100%; padding: 16px 24px; background: var(--primary);
+      color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 16px;
+      text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s; cursor: pointer;
       box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
     }
-    .btn:hover { background: var(--primary-dark); box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3); }
+    .btn:hover { background: var(--primary-dark); box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3); transform: translateY(-2px);}
 
     .badge {
-      position: absolute; top: 15px; right: 15px;
-      background: #fee2e2; color: #b91c1c; font-size: 11px; font-weight: 800;
-      padding: 5px 10px; border-radius: 20px; letter-spacing: 0.5px;
+      position: absolute; top: 15px; right: 15px; background: #fee2e2; color: #b91c1c;
+      font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 20px; letter-spacing: 0.5px;
     }
 
-    /* --- FOOTER --- */
-    footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px; background: white; border-top: 1px solid #e5e7eb; }
+    /* =========================================
+       TAMPILAN 2: IFRAME APP (Full Screen)
+       ========================================= */
+    #app-view {
+      display: none; flex-direction: column; height: 100vh; width: 100vw; background: var(--bg-light);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .app-toolbar {
+      background: white; border-bottom: 1px solid #e5e7eb; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-md); z-index: 10;
+    }
+    
+    .btn-back {
+      background: #f1f5f9; color: var(--text-main); border: none; padding: 10px 20px;
+      border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s;
+      display: flex; align-items: center; gap: 8px; font-size: 14px;
+    }
+    .btn-back:hover { background: #e2e8f0; }
+
+    .app-toolbar-title { font-weight: 800; color: var(--primary-solid); font-size: 16px; }
+
+    /* Pembungkus iFrame */
+    .iframe-wrapper { flex: 1; position: relative; width: 100%; height: 100%; background: #f8fafc;}
+    iframe { width: 100%; height: 100%; border: none; display: block; }
+    
+    .loading-frame {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; background: rgba(255,255,255,0.9); z-index: 5;
+    }
+    .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+
+    footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px; background: white; border-top: 1px solid #e5e7eb; margin-top: auto;}
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 28px; }
-      header p { font-size: 15px; }
-      main { padding: 40px 20px; }
+      header h1 { font-size: 28px; } header p { font-size: 15px; }
+      .app-toolbar-title { display: none; } /* Sembunyikan judul di HP agar tombol kembali lebih lega */
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Portal Terpadu USBD PAI & BP</h1>
-    <p>Sistem Pendaftaran dan Penilaian Administrasi KKG PAI Kabupaten Bantul Tahun Pelajaran 2025/2026</p>
-  </header>
+  <!-- TAMPILAN PORTAL UTAMA -->
+  <div id="home-view">
+    <header>
+      <h1>Portal Terpadu USBD PAI & BP</h1>
+      <p>Sistem Pendaftaran dan Penilaian Administrasi KKG PAI Kabupaten Bantul Tahun Pelajaran 2025/2026</p>
+    </header>
 
-  <main>
     <div class="portal-grid">
-      
-      <!-- KARTU 1: PENDATAAN -->
+      <!-- TOMBOL PENDATAAN -->
       <div class="card">
         <div class="icon-wrapper">📝</div>
         <h2>Pendaftaran Siswa</h2>
         <p>Akses terbuka untuk Guru dan Perwakilan Sekolah. Gunakan portal ini untuk menginput daftar nama peserta ujian dan mengunduh Daftar Hadir serta Berita Acara.</p>
-        <a href="https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec" class="btn">Masuk Pendaftaran &rarr;</a>
+        <button class="btn" onclick="openApp('https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec', 'Pendataan Siswa')">Masuk Pendaftaran &rarr;</button>
       </div>
 
-      <!-- KARTU 2: PENILAIAN -->
+      <!-- TOMBOL PENILAIAN -->
       <div class="card">
         <div class="badge">🔒 KHUSUS ADMIN</div>
         <div class="icon-wrapper">📊</div>
         <h2>Penilaian & Analisis</h2>
         <p>Akses terkunci khusus untuk Admin Penilai dan Korektor. Gunakan portal ini untuk memproses LJK, mencetak Rekap Nilai, dan Analisis Butir Soal.</p>
-        <!-- Perhatikan tambahan ?page=nilai di akhir URL -->
-        <a href="https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec?page=nilai" class="btn">Masuk Penilaian &rarr;</a>
+        <button class="btn" onclick="openApp('https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec?page=nilai', 'Penilaian LJK & Analisis')">Masuk Penilaian &rarr;</button>
       </div>
-
     </div>
-  </main>
 
-  <footer>
-    &copy; 2026 KKG PAI Kabupaten Bantul, D.I. Yogyakarta. All rights reserved.
-  </footer>
+    <footer>
+      &copy; 2026 KKG PAI Kabupaten Bantul, D.I. Yogyakarta. All rights reserved.
+    </footer>
+  </div>
+
+  <!-- TAMPILAN IFRAME (Aplikasi Berjalan Di Sini) -->
+  <div id="app-view">
+    <div class="app-toolbar">
+      <button class="btn-back" onclick="closeApp()">&larr; Kembali ke Portal Utama</button>
+      <div class="app-toolbar-title" id="app-title">Memuat...</div>
+    </div>
+    
+    <div class="iframe-wrapper">
+      <div class="loading-frame" id="iframe-loader">
+        <div class="spinner"></div>
+        <p style="margin-top: 15px; font-weight: 700; color: var(--primary-solid);">Menyambungkan ke Server Google...</p>
+      </div>
+      <iframe id="app-frame" src="" onload="hideLoader()"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // FUNGSI MEMBUKA APLIKASI DI DALAM IFRAME
+    function openApp(url, title) {
+      document.getElementById('home-view').style.display = 'none';
+      document.getElementById('app-view').style.display = 'flex';
+      
+      document.getElementById('app-title').innerText = title;
+      document.getElementById('iframe-loader').style.display = 'flex';
+      
+      // Inject URL Google Script ke dalam iFrame
+      document.getElementById('app-frame').src = url;
+    }
+
+    // FUNGSI MENUTUP APLIKASI & KEMBALI KE HOME
+    function closeApp() {
+      // Kosongkan src agar iframe berhenti memproses
+      document.getElementById('app-frame').src = '';
+      
+      document.getElementById('app-view').style.display = 'none';
+      document.getElementById('home-view').style.display = 'flex';
+    }
+
+    // FUNGSI MENGHILANGKAN LOADING SETELAH IFRAME SELESAI DIMUAT
+    function hideLoader() {
+      // Pastikan loader hilang hanya jika ada src yang dimuat (bukan pas dikosongkan)
+      if(document.getElementById('app-frame').src !== '') {
+        document.getElementById('iframe-loader').style.display = 'none';
+      }
+    }
+  </script>
 
 </body>
 </html>
