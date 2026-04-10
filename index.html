@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Terpadu USBD PAI & BP 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-light: #10b981;
+      --primary-dark: #047857;
+      --primary-solid: #064e3b;
+      --bg-light: #f0fdf4;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --white: #ffffff;
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+    
+    body { 
+      background-color: var(--bg-light); 
+      color: var(--text-main); 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+    }
+
+    /* --- HERO HEADER --- */
+    header {
+      background: linear-gradient(135deg, var(--primary-solid) 0%, var(--primary) 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+    header::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 5px;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    }
+    header h1 { font-size: 36px; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    header p { font-size: 18px; font-weight: 400; color: #d1fae5; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+
+    /* --- MAIN CONTENT --- */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* --- CARDS --- */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s ease;
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-light);
+    }
+    .card::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+      background: var(--primary-light); opacity: 0; transition: 0.3s;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .icon-wrapper {
+      width: 80px; height: 80px;
+      background: #ecfdf5;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      color: var(--primary-dark);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .card h2 { font-size: 24px; font-weight: 800; color: var(--primary-solid); margin-bottom: 15px; }
+    .card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 30px; flex: 1; }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: 0.3s;
+      box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    }
+    .btn:hover { background: var(--primary-dark); box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3); }
+
+    .badge {
+      position: absolute; top: 15px; right: 15px;
+      background: #fee2e2; color: #b91c1c; font-size: 11px; font-weight: 800;
+      padding: 5px 10px; border-radius: 20px; letter-spacing: 0.5px;
+    }
+
+    /* --- FOOTER --- */
+    footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px; background: white; border-top: 1px solid #e5e7eb; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 28px; }
+      header p { font-size: 15px; }
+      main { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Portal Terpadu USBD PAI & BP</h1>
+    <p>Sistem Pendaftaran dan Penilaian Administrasi KKG PAI Kabupaten Bantul Tahun Pelajaran 2025/2026</p>
+  </header>
+
+  <main>
+    <div class="portal-grid">
+      
+      <!-- KARTU 1: PENDATAAN -->
+      <div class="card">
+        <div class="icon-wrapper">📝</div>
+        <h2>Pendaftaran Siswa</h2>
+        <p>Akses terbuka untuk Guru dan Perwakilan Sekolah. Gunakan portal ini untuk menginput daftar nama peserta ujian dan mengunduh Daftar Hadir serta Berita Acara.</p>
+        <a href="https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec" class="btn">Masuk Pendaftaran &rarr;</a>
+      </div>
+
+      <!-- KARTU 2: PENILAIAN -->
+      <div class="card">
+        <div class="badge">🔒 KHUSUS ADMIN</div>
+        <div class="icon-wrapper">📊</div>
+        <h2>Penilaian & Analisis</h2>
+        <p>Akses terkunci khusus untuk Admin Penilai dan Korektor. Gunakan portal ini untuk memproses LJK, mencetak Rekap Nilai, dan Analisis Butir Soal.</p>
+        <!-- Perhatikan tambahan ?page=nilai di akhir URL -->
+        <a href="https://script.google.com/a/macros/sd1godegan.sch.id/s/AKfycbxSUKhoMHUcM1gFlI-EMtlkhxTYlD2PXy5pIeAX301IUU5CGk_fIeXG6Qs9hOaJpp0u/exec?page=nilai" class="btn">Masuk Penilaian &rarr;</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 KKG PAI Kabupaten Bantul, D.I. Yogyakarta. All rights reserved.
+  </footer>
+
+</body>
+</html>
