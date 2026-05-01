@@ -239,7 +239,43 @@
         document.getElementById('iframe-loader').style.display = 'none';
       }
     }
+
+    // ========================================================
+    // === SISTEM BRANKAS LOCALSTORAGE UNTUK IFRAME ===
+    // ========================================================
+    window.addEventListener('message', function(event) {
+      // 1. Pastikan ada data dalam event
+      if (!event.data) return;
+
+      // 2. Jika Iframe minta SIMPAN data
+      if (event.data.action === 'SAVE_DATA') {
+        localStorage.setItem(event.data.key, event.data.value);
+        console.log(`[Portal] Berhasil menyimpan: ${event.data.key}`);
+      }
+      
+      // 3. Jika Iframe minta BACA data
+      else if (event.data.action === 'GET_DATA') {
+        const storedValue = localStorage.getItem(event.data.key);
+        
+        // Kirim kembali datanya ke iframe yang sedang aktif
+        const iframe = document.getElementById('app-frame');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage({
+            action: 'RECEIVE_DATA',
+            key: event.data.key,
+            value: storedValue
+          }, '*');
+        }
+      }
+      
+      // 4. Jika Iframe minta HAPUS data
+      else if (event.data.action === 'REMOVE_DATA') {
+        localStorage.removeItem(event.data.key);
+        console.log(`[Portal] Berhasil menghapus: ${event.data.key}`);
+      }
+    });
   </script>
+
 <a href="https://wa.me/6285643238821?text=Halo%20Admin%20USBD,%20saya%20membutuhkan%20bantuan%20terkait%20sistem%20pendaftaran." 
    class="floating-wa" 
    target="_blank" 
